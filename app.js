@@ -17,8 +17,8 @@ const displayPhone = data => {
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div class="card">
-                    <img src="${singleData.image}" class="card-img-top h-50" alt="...">
+        <div class="card h-100">
+                    <img src="${singleData.image}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">${singleData.phone_name}</h5>
                         <p class="card-text">${singleData.slug}</p>
