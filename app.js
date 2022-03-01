@@ -22,7 +22,7 @@ const displayPhone = data => {
                     <div class="card-body">
                         <h5 class="card-title text-center">${singleData.phone_name}</h5>
                         <p class="card-text text-center">${singleData.slug}</p>
-                        <a href="#"  onclick="LoadphoneDetails()" class="btn btn-primary text-center">Details</a>
+                        <a href="#"  onclick="loadphoneDetails('${singleData.slug}')" class="btn btn-primary text-center">Details</a>
                     </div>
                 </div>
         `;
@@ -30,14 +30,15 @@ const displayPhone = data => {
     })
 }
 
-const LoadphoneDetails = data => {
+
+
+const loadphoneDetails = id => {
+
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => console.log(data))
+
+
 
 }
-
-// const LoadphoneDetails = () => {
-
-//     const url = `https://openapi.programming-hero.com/api/phone/${singleData.slug}`;
-//     fetch(url)
-//         .then(res => res.json())
-//         .then(data => console.log(data))
-// }
