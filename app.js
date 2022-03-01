@@ -1,3 +1,4 @@
+// call Api Phone Search
 const searchPhone = () => {
     const searchBox = document.getElementById('search-box');
     const searchText = searchBox.value;
@@ -9,20 +10,20 @@ const searchPhone = () => {
         .then(res => res.json())
         .then(data => displayPhone(data.data));
 }
-
+// Display search Result
 const displayPhone = data => {
     const searchPhoneResult = document.getElementById('search-result');
     data.forEach(singleData => {
-        console.log(singleData);
+
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
-        <div class="card m-auto" style="width: 18rem;">
+        <div class="m-auto" style="width: 18rem;">
                     <img src="${singleData.image}" class="card-img-top" alt="..."  style="width=80%" height="70%">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">${singleData.phone_name}</h5>
-                        <p class="card-text text-center">${singleData.slug}</p>
-                        <a href="#"  onclick="loadphoneDetails('${singleData.slug}')" class="btn btn-primary text-center">Details</a>
+                    <div class="card-body text-center">
+                       <h3 class="card-text text-center">${singleData.brand}</h3>
+                        <h3 class="card-title text-center">${singleData.phone_name}</h3>
+                        <a href="#"  onclick="loadphoneDetails('${singleData.slug}')" class="btn btn-primary ">Details</a>
                     </div>
                 </div>
         `;
@@ -31,15 +32,15 @@ const displayPhone = data => {
 }
 
 
-
+// call Api details
 const loadphoneDetails = id => {
-
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhoneDetails(data.data))
 }
 
+// Display Phone Details
 const displayPhoneDetails = data => {
     console.log(data)
     const displayPhone = document.getElementById('phone-details');
