@@ -70,7 +70,7 @@ const displayPhoneDetails = data => {
                <p class="card-title"><small class="text-muted">${data.releaseDate}</small></p>
                </div>
                <div class="col-md-6 col-sm-12 pt-5">
-                   <div class="card card-body">
+                   <div class="card card-body m-3">
                        <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                        <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
                        <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
@@ -93,7 +93,7 @@ const displayPhoneDetails = data => {
                <p class="card-title"><small class="text-muted">${data.releaseDate} No Release Date Found</small></p>
                </div>
                <div class="col-md-6 col-sm-12 pt-5">
-                   <div class="card card-body">
+                   <div class="card card-body m-3">
                        <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                        <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
                        <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
@@ -116,7 +116,7 @@ const displayPhoneDetails = data => {
                <p class="card-title"><small class="text-muted">${data.releaseDate} No Release Date Found</small></p>
                </div>
                <div class="col-md-6 col-sm-12 pt-5">
-                   <div class="card card-body">
+                   <div class="card card-body m-3">
                        <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                        <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
                        <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
@@ -139,7 +139,7 @@ const displayPhoneDetails = data => {
                <p class="card-title"><small class="text-muted">${data.releaseDate}</small></p>
                </div>
                <div class="col-md-6 pt-5">
-                   <div class="card card-body">
+                   <div class="card card-body m-3">
                        <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                        <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
                        <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
