@@ -2,8 +2,6 @@
 const searchPhone = () => {
     const searchBox = document.getElementById('search-box');
     const searchText = searchBox.value;
-
-
     // clear data
     searchBox.value = '';
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -19,13 +17,12 @@ const displayPhone = data => {
     const first20Data = data.slice(0, 20);
     const error = document.getElementById('error');
     searchPhoneResult.textContent = '';
-
+    // Error Handel of search
     if (data.length == 0) {
         error.innerText = "'Sorry! No result found on Mobile Bazer'"
     }
     else {
         first20Data.forEach(singleData => {
-
             const div = document.createElement('div');
             div.classList.add('col');
             div.innerHTML = `
@@ -42,14 +39,10 @@ const displayPhone = data => {
         })
         error.innerText = ""
     }
-
     loadphoneDetails() = '';
 }
-
-
 // call Api details
 const loadphoneDetails = id => {
-
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     // load data
     fetch(url)
@@ -59,11 +52,11 @@ const loadphoneDetails = id => {
 
 // Display Phone Details
 const displayPhoneDetails = data => {
-    console.log(data)
     const displayPhone = document.getElementById('phone-details');
     displayPhone.textContent = '';
     const div = document.createElement('div');
     div.classList.add('col');
+    // Error Handel of Release Date & Others Option
     if (data.others != undefined && data.releaseDate != '') {
         div.innerHTML = `
         <div class="row g-0">
@@ -82,11 +75,10 @@ const displayPhoneDetails = data => {
                        <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
                        <p class="card-title"><small class="text-muted"><strong>Others : </strong>${data.others.Bluetooth}, GPS : ${data.others.GPS}, NFC : ${data.others.NFC}, Radio : ${data.others.Radio}, USB : ${data.others.USB}, WLAN : ${data.others.WLAN}</small></p>
                        </div>
-                      
                    </div >
                </div >
                </div >
-        `
+        `;
     }
     else if (data.others != undefined && data.releaseDate == '') {
         div.innerHTML = `
@@ -106,11 +98,10 @@ const displayPhoneDetails = data => {
                        <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
                        <p class="card-title"><small class="text-muted"><strong>Others : </strong>${data.others.Bluetooth}, GPS : ${data.others.GPS}, NFC : ${data.others.NFC}, Radio : ${data.others.Radio}, USB : ${data.others.USB}, WLAN : ${data.others.WLAN}</small></p>
                        </div>
-                      
                    </div >
                </div >
                </div >
-        `
+        `;
     }
     else if (data.others == undefined && data.releaseDate == '') {
         div.innerHTML = `
@@ -128,13 +119,11 @@ const displayPhoneDetails = data => {
                        <h5 class="card-title"><strong>Memory : </strong> ${data.mainFeatures.memory}</h5>
                        <h5 class="card-title"><strong>Sensors : </strong> ${data.mainFeatures.sensors}</h5>
                        <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
-                       
                        </div>
-                      
                    </div >
                </div >
                </div >
-        `
+        `;
     }
     else {
         div.innerHTML = `
@@ -152,13 +141,11 @@ const displayPhoneDetails = data => {
                        <h5 class="card-title"><strong>Memory : </strong> ${data.mainFeatures.memory}</h5>
                        <h5 class="card-title"><strong>Sensors : </strong> ${data.mainFeatures.sensors}</h5>
                        <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
-                      
                        </div>
-                      
                    </div >
                </div >
                </div >
-        `
+        `;
     }
     displayPhone.appendChild(div);
 }
