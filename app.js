@@ -3,6 +3,7 @@ const searchPhone = () => {
     const searchBox = document.getElementById('search-box');
     const searchText = searchBox.value;
     // clear data
+
     searchBox.value = '';
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
 
@@ -14,9 +15,12 @@ const searchPhone = () => {
 // Display search Result
 const displayPhone = data => {
     const searchPhoneResult = document.getElementById('search-result');
+    const displayPhone = document.getElementById('phone-details');
     const first20Data = data.slice(0, 20);
     const error = document.getElementById('error');
+    // Clean text Content
     searchPhoneResult.textContent = '';
+    displayPhone.textContent = '';
     // Error Handel of search
     if (data.length == 0) {
         error.innerText = "'Sorry! No result found on Mobile Bazer'"
@@ -31,15 +35,15 @@ const displayPhone = data => {
                         <div class="card-body text-center">
                            <h3 class="card-text text-center">${singleData.brand}</h3>
                             <h5 class="card-title text-center">${singleData.phone_name}</h5>
-                            <a href="#"  onclick="loadphoneDetails('${singleData.slug}')" class="btn btn-primary ">Details</a>
+                            <a href="#" id="" onclick="loadphoneDetails('${singleData.slug}')" class="btn btn-primary ">Details</a>
                         </div>
                     </div>
             `;
             searchPhoneResult.appendChild(div);
         })
-        error.innerText = ""
+        error.innerText = "";
     }
-    loadphoneDetails() = '';
+
 }
 // call Api details
 const loadphoneDetails = id => {
