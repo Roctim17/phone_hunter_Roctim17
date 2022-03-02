@@ -2,10 +2,13 @@
 const searchPhone = () => {
     const searchBox = document.getElementById('search-box');
     const searchText = searchBox.value;
-    console.log(searchText);
+
+
+    // clear data
     searchBox.value = '';
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
 
+    // load data
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhone(data.data));
@@ -13,22 +16,31 @@ const searchPhone = () => {
 // Display search Result
 const displayPhone = data => {
     const searchPhoneResult = document.getElementById('search-result');
-    data.forEach(singleData => {
+    searchPhoneResult.textContent = '';
+    if (data.length == 0) {
+        document.getElementById('error').style.display = 'block';
+    }
+    else {
+        data.forEach(singleData => {
 
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = `
-        <div class="m-auto" style="width: 18rem;">
-                    <img src="${singleData.image}" class="card-img-top" alt="..."  style="width=80%" height="70%">
-                    <div class="card-body text-center">
-                       <h3 class="card-text text-center">${singleData.brand}</h3>
-                        <h3 class="card-title text-center">${singleData.phone_name}</h3>
-                        <a href="#"  onclick="loadphoneDetails('${singleData.slug}')" class="btn btn-primary ">Details</a>
+            const div = document.createElement('div');
+            div.classList.add('col');
+            div.innerHTML = `
+            <div class="m-auto" style="width: 18rem;">
+                        <img src="${singleData.image}" class="card-img-top" alt="..."  style="width=80%" height="70%">
+                        <div class="card-body text-center">
+                           <h3 class="card-text text-center">${singleData.brand}</h3>
+                            <h5 class="card-title text-center">${singleData.phone_name}</h5>
+                            <a href="#"  onclick="loadphoneDetails('${singleData.slug}')" class="btn btn-primary ">Details</a>
+                        </div>
                     </div>
-                </div>
-        `;
-        searchPhoneResult.appendChild(div);
-    })
+            `;
+            searchPhoneResult.appendChild(div);
+        })
+        document.getElementById('error').style.display = 'none';
+    }
+
+
 }
 
 
@@ -44,6 +56,7 @@ const loadphoneDetails = id => {
 const displayPhoneDetails = data => {
     console.log(data)
     const displayPhone = document.getElementById('phone-details');
+    displayPhone.textContent = '';
     const div = document.createElement('div');
     div.classList.add('col');
     div.innerHTML = `
@@ -51,9 +64,9 @@ const displayPhoneDetails = data => {
            <div class="col-md-6 text-center" >
            <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
            <h5 class="card-title">${data.name}</h5>
-           <p class="card-text"><small class="text-muted">${data.releaseDate}</small></p>
+           <p class="card-title"><small class="text-muted">${data.releaseDate}</small></p>
            </div>
-           <div class="col-md-6">
+           <div class="col-md-6 pt-5">
                <div class="card-body">
                    <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                    <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
@@ -61,7 +74,8 @@ const displayPhoneDetails = data => {
                    <h5 class="card-title"><strong>Memory : </strong> ${data.mainFeatures.memory}</h5>
                    <h5 class="card-title"><strong>Sensors : </strong> ${data.mainFeatures.sensors}</h5>
                    <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
-                    
+                   <p class="card-title"><small class="text-muted"><strong>Others : </strong>Bluetooth:  ${data.others.Bluetooth}, GPS : ${data.others.GPS}, NFC : ${data.others.NFC}, Radio : ${data.others.Radio}, USB : ${data.others.USB}, WLAN : ${data.others.WLAN}</small></p>
+                   </div>
                </div >
            </div >
            </div >
