@@ -63,14 +63,14 @@ const displayPhoneDetails = data => {
     // Error Handel of Release Date & Others Option
     if (data.others != undefined && data.releaseDate != '') {
         div.innerHTML = `
-        <div class="row g-0 card">
+        <div class="row g-0">
                <div class="col-md-6 col-sm-12 text-center" >
                <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
                <h5 class="card-title">${data.name}</h5>
                <p class="card-title"><small class="text-muted">${data.releaseDate}</small></p>
                </div>
                <div class="col-md-6 col-sm-12 pt-5">
-                   <div class="card-body">
+                   <div class="card card-body">
                        <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                        <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
                        <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
@@ -86,14 +86,14 @@ const displayPhoneDetails = data => {
     }
     else if (data.others != undefined && data.releaseDate == '') {
         div.innerHTML = `
-        <div class="row g-0 card">
+        <div class="row g-0">
                <div class="col-md-6 col-sm-12 text-center" >
                <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
                <h5 class="card-title">${data.name}</h5>
                <p class="card-title"><small class="text-muted">${data.releaseDate} No Release Date Found</small></p>
                </div>
                <div class="col-md-6 col-sm-12 pt-5">
-                   <div class="card-body">
+                   <div class="card card-body">
                        <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                        <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
                        <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
@@ -109,14 +109,14 @@ const displayPhoneDetails = data => {
     }
     else if (data.others == undefined && data.releaseDate == '') {
         div.innerHTML = `
-        <div class="row g-0 card">
+        <div class="row g-0">
                <div class="col-md-6 col-sm-12 text-center" >
                <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
                <h5 class="card-title">${data.name}</h5>
                <p class="card-title"><small class="text-muted">${data.releaseDate} No Release Date Found</small></p>
                </div>
                <div class="col-md-6 col-sm-12 pt-5">
-                   <div class="card-body">
+                   <div class="card card-body">
                        <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                        <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
                        <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
@@ -131,14 +131,15 @@ const displayPhoneDetails = data => {
     }
     else {
         div.innerHTML = `
-        <div class="row g-0 card">
-               <div class="col-md-6 col-sm-12 text-center" >
+        
+        <div class="row g-0">
+               <div class="col-md-6 text-center" >
                <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
                <h5 class="card-title">${data.name}</h5>
                <p class="card-title"><small class="text-muted">${data.releaseDate}</small></p>
                </div>
-               <div class="col-md-6 col-sm-12 pt-5">
-                   <div class="card-body">
+               <div class="col-md-6 pt-5">
+                   <div class="card card-body">
                        <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
                        <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
                        <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
@@ -149,6 +150,8 @@ const displayPhoneDetails = data => {
                    </div >
                </div >
                </div >
+        
+        
         `;
     }
     displayPhone.appendChild(div);
