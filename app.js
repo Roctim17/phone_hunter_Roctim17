@@ -6,7 +6,6 @@ const searchPhone = () => {
 
     // clear data
     searchBox.value = '';
-    displayPhone.textContent = '';
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
 
     // load data
