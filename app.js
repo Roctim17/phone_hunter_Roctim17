@@ -6,6 +6,7 @@ const searchPhone = () => {
 
     // clear data
     searchBox.value = '';
+    displayPhone.textContent = '';
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
 
     // load data
@@ -16,12 +17,15 @@ const searchPhone = () => {
 // Display search Result
 const displayPhone = data => {
     const searchPhoneResult = document.getElementById('search-result');
+    const first20Data = data.slice(0, 20);
+    const error = document.getElementById('error');
     searchPhoneResult.textContent = '';
+
     if (data.length == 0) {
-        document.getElementById('error').style.display = 'block';
+        error.innerText = "'Sorry! No result found on Mobile Bazer'"
     }
     else {
-        data.forEach(singleData => {
+        first20Data.forEach(singleData => {
 
             const div = document.createElement('div');
             div.classList.add('col');
@@ -37,16 +41,18 @@ const displayPhone = data => {
             `;
             searchPhoneResult.appendChild(div);
         })
-        document.getElementById('error').style.display = 'none';
+        error.innerText = ""
     }
 
-
+    loadphoneDetails() = '';
 }
 
 
 // call Api details
 const loadphoneDetails = id => {
+
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    // load data
     fetch(url)
         .then(res => res.json())
         .then(data => displayPhoneDetails(data.data))
@@ -59,30 +65,102 @@ const displayPhoneDetails = data => {
     displayPhone.textContent = '';
     const div = document.createElement('div');
     div.classList.add('col');
-    div.innerHTML = `
-    <div class="row g-0">
-           <div class="col-md-6 text-center" >
-           <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
-           <h5 class="card-title">${data.name}</h5>
-           <p class="card-title"><small class="text-muted">${data.releaseDate}</small></p>
-           </div>
-           <div class="col-md-6 pt-5">
-               <div class="card-body">
-                   <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
-                   <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
-                   <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
-                   <h5 class="card-title"><strong>Memory : </strong> ${data.mainFeatures.memory}</h5>
-                   <h5 class="card-title"><strong>Sensors : </strong> ${data.mainFeatures.sensors}</h5>
-                   <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
-                   <p class="card-title"><small class="text-muted"><strong>Others : </strong>Bluetooth:  ${data.others.Bluetooth}, GPS : ${data.others.GPS}, NFC : ${data.others.NFC}, Radio : ${data.others.Radio}, USB : ${data.others.USB}, WLAN : ${data.others.WLAN}</small></p>
-                   </div>
+    if (data.others != undefined && data.releaseDate != '') {
+        div.innerHTML = `
+        <div class="row g-0">
+               <div class="col-md-6 text-center" >
+               <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
+               <h5 class="card-title">${data.name}</h5>
+               <p class="card-title"><small class="text-muted">${data.releaseDate}</small></p>
+               </div>
+               <div class="col-md-6 pt-5">
+                   <div class="card-body">
+                       <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
+                       <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
+                       <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
+                       <h5 class="card-title"><strong>Memory : </strong> ${data.mainFeatures.memory}</h5>
+                       <h5 class="card-title"><strong>Sensors : </strong> ${data.mainFeatures.sensors}</h5>
+                       <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
+                       <p class="card-title"><small class="text-muted"><strong>Others : </strong>${data.others.Bluetooth}, GPS : ${data.others.GPS}, NFC : ${data.others.NFC}, Radio : ${data.others.Radio}, USB : ${data.others.USB}, WLAN : ${data.others.WLAN}</small></p>
+                       </div>
+                      
+                   </div >
                </div >
-           </div >
-           </div >
-    `
+               </div >
+        `
+    }
+    else if (data.others != undefined && data.releaseDate == '') {
+        div.innerHTML = `
+        <div class="row g-0">
+               <div class="col-md-6 text-center" >
+               <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
+               <h5 class="card-title">${data.name}</h5>
+               <p class="card-title"><small class="text-muted">${data.releaseDate} No Release Date Found</small></p>
+               </div>
+               <div class="col-md-6 pt-5">
+                   <div class="card-body">
+                       <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
+                       <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
+                       <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
+                       <h5 class="card-title"><strong>Memory : </strong> ${data.mainFeatures.memory}</h5>
+                       <h5 class="card-title"><strong>Sensors : </strong> ${data.mainFeatures.sensors}</h5>
+                       <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
+                       <p class="card-title"><small class="text-muted"><strong>Others : </strong>${data.others.Bluetooth}, GPS : ${data.others.GPS}, NFC : ${data.others.NFC}, Radio : ${data.others.Radio}, USB : ${data.others.USB}, WLAN : ${data.others.WLAN}</small></p>
+                       </div>
+                      
+                   </div >
+               </div >
+               </div >
+        `
+    }
+    else if (data.others == undefined && data.releaseDate == '') {
+        div.innerHTML = `
+        <div class="row g-0">
+               <div class="col-md-6 text-center" >
+               <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
+               <h5 class="card-title">${data.name}</h5>
+               <p class="card-title"><small class="text-muted">${data.releaseDate} No Release Date Found</small></p>
+               </div>
+               <div class="col-md-6 pt-5">
+                   <div class="card-body">
+                       <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
+                       <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
+                       <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
+                       <h5 class="card-title"><strong>Memory : </strong> ${data.mainFeatures.memory}</h5>
+                       <h5 class="card-title"><strong>Sensors : </strong> ${data.mainFeatures.sensors}</h5>
+                       <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
+                       
+                       </div>
+                      
+                   </div >
+               </div >
+               </div >
+        `
+    }
+    else {
+        div.innerHTML = `
+        <div class="row g-0">
+               <div class="col-md-6 text-center" >
+               <img src="${data.image}" class="img-fluid rounded-start" style="height:100%" alt="...">
+               <h5 class="card-title">${data.name}</h5>
+               <p class="card-title"><small class="text-muted">${data.releaseDate}</small></p>
+               </div>
+               <div class="col-md-6 pt-5">
+                   <div class="card-body">
+                       <h5 class="card-title"><strong>Brand : </strong> ${data.brand}</h5>
+                       <h5 class="card-title"><strong>Processor : </strong> ${data.mainFeatures.chipSet}</h5>
+                       <h5 class="card-title"><strong>Screen : </strong> ${data.mainFeatures.displaySize}</h5>
+                       <h5 class="card-title"><strong>Memory : </strong> ${data.mainFeatures.memory}</h5>
+                       <h5 class="card-title"><strong>Sensors : </strong> ${data.mainFeatures.sensors}</h5>
+                       <h5 class="card-title"><strong>Storage : </strong> ${data.mainFeatures.storage}</h5>
+                      
+                       </div>
+                      
+                   </div >
+               </div >
+               </div >
+        `
+    }
     displayPhone.appendChild(div);
-
 }
 
-
-{/* <h5 class="card-title"><strong>Others : </strong>Bluetooth:  ${data.others.Bluetooth}, GPS : ${data.others.GPS}, NFC : ${data.others.NFC}, Radio : ${data.others.Radio}, USB : ${data.others.USB}, WLAN : ${data.others.WLAN}</h5> */ }
